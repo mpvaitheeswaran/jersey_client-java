@@ -14,28 +14,32 @@ public class App
 {
     public static void main( String[] args )
     {
-        String url = "http://localhost:8080/restapi/rest/";
-        
-        Client client = ClientBuilder.newClient();
-        WebTarget webTarget = client.target(url);
-        WebTarget studentWebTarget = webTarget.path("students/{rollno}");
-        WebTarget studentPostTarget = webTarget.path("students/add");
-        Student student = studentWebTarget.resolveTemplate("rollno", "101")
-        		.request(MediaType.APPLICATION_JSON)
-        		.get(Student.class);
-        Student newStudent = new Student(104,"Kamala","Yong avengers",16);
-        Response postStudent = studentPostTarget        		
-        		.request(MediaType.APPLICATION_JSON)
-        		.post(Entity.json(newStudent));
+//        String url = "http://localhost:8080/restapi/rest/";
+//        
+//        Client client = ClientBuilder.newClient();
+//        WebTarget webTarget = client.target(url);
+//        WebTarget studentWebTarget = webTarget.path("students/{rollno}");
+//        WebTarget studentPostTarget = webTarget.path("students/add");
+//        Student student = studentWebTarget.resolveTemplate("rollno", "101")
+//        		.request(MediaType.APPLICATION_JSON)
+//        		.get(Student.class);
+//        Student newStudent = new Student(104,"Kamala","Yong avengers",16);
+//        Response postStudent = studentPostTarget        		
+//        		.request(MediaType.APPLICATION_JSON)
+//        		.post(Entity.json(newStudent));
         		
-        Student addedStudent = postStudent.readEntity(Student.class);
+//        Student addedStudent = postStudent.readEntity(Student.class);
+    	
+    	RestClient client = new RestClient();
+    	
+    	//Get the student from api
+        System.out.println(client.getStudent(101));
         
-//        Invocation.Builder invocationBuilder =  studentWebTarget.request(MediaType.APPLICATION_JSON);
-//        Student student = invocationBuilder.get(Student.class);
-         
-//        Student student = response.readEntity(Student.class);
-//           
-//        System.out.println(response.getStatus());
-        System.out.println(student);
+        //POST to create a new student in api.
+        Student newStudent = new Student(100,"Wanda","Avenger",23);
+        System.out.println(client.createStudent(newStudent));
+        
+        //GET to all stdents in api
+        System.out.println(client.getAllStudents());
     }
 }
