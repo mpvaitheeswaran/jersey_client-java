@@ -1,5 +1,7 @@
 package com.vaitheeswaran.client;
 
+import java.io.File;
+
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -32,14 +34,18 @@ public class App
     	
     	RestClient client = new RestClient();
     	
-    	//Get the student from api
-        System.out.println(client.getStudent(101));
-        
-        //POST to create a new student in api.
-        Student newStudent = new Student(100,"Wanda","Avenger",23);
-        System.out.println(client.createStudent(newStudent));
-        
-        //GET to all stdents in api
-        System.out.println(client.getAllStudents());
+//    	//Get the student from api
+//        System.out.println(client.getStudent(101));
+//        
+//        //POST to create a new student in api.
+//        Student newStudent = new Student(100,"Wanda","Avenger",23);
+//        System.out.println(client.createStudent(newStudent));
+//        
+//        //GET to all stdents in api
+//        System.out.println(client.getAllStudents());
+    	//Uploding file into server.
+    	File uploadFile = new File("D://vaitheeswaran/pat.txt");
+    	Response res = client.postFile(uploadFile);
+    	System.out.println(res);
     }
 }
